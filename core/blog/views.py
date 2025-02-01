@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView ,RedirectView ,ListView
+from django.views.generic import TemplateView ,RedirectView ,ListView , FormView , CreateView
 from django.views.generic.detail import DetailView
-
+from .forms import ContactForm
 from .models import Post
+from django.urls import reverse
+from django.shortcuts import redirect
+
 # Create your views here.
 
 class IndexView(TemplateView):
@@ -29,3 +32,22 @@ class BlogPost(ListView):
     
 class PostDetailView(DetailView):
     model = Post    
+    
+
+class ContactPost(FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = None
+    def get_success_url(self):
+        return redirect('blog:post')    
+    
+    
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['title','status' , 'category','content' ,'published_date'] 
+    success_url ='/blog/post/'
+    
+    def form_valid(self, form):
+        form.instance.auther = self.request.user
+        return super().form_valid(form)
+       
