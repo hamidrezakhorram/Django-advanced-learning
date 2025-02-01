@@ -5,6 +5,8 @@ from .forms import ContactForm
 from .models import Post
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -22,7 +24,7 @@ class RedirectWeb(RedirectView):
     pattern_name = "blog:cbv"    
     
  
-class BlogPost(ListView):
+class BlogPost(LoginRequiredMixin,ListView):
     context_object_name ='posts'    
     paginate_by = 2
     def get_queryset(self):
