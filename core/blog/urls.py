@@ -12,4 +12,5 @@ urlpatterns =[
     path('post/contact',ContactPost.as_view() , name ='post-contact'),
     path('post/create',PostCreateView.as_view() ,name='create-post'),
     path('post/<int:pk>/update' , PostUpdateView.as_view() , name='post-update'),
+    path('post/<int:pk>/delete' , PostDeleteView.as_view() , name='post-delete'),    
 ]

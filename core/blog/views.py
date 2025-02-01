@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView ,RedirectView ,ListView , FormView , CreateView , UpdateView
+from django.views.generic import TemplateView ,RedirectView ,ListView , FormView , CreateView , UpdateView ,DeleteView
 from django.views.generic.detail import DetailView
 from .forms import ContactForm
 from .models import Post
@@ -55,6 +55,11 @@ class PostCreateView(CreateView):
 class PostUpdateView(UpdateView):
     model = Post
     fields = ['title','status' , 'category','content' ,'published_date'] 
+    success_url ='/blog/post/'
+    
+           
+class PostDeleteView(DeleteView):
+    model = Post
     success_url ='/blog/post/'
     
            
