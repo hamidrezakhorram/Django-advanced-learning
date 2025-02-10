@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path , include
 from .views import *
 from django.views.generic.base import RedirectView
 
@@ -12,5 +12,6 @@ urlpatterns =[
     path('post/contact',ContactPost.as_view() , name ='post-contact'),
     path('post/create',PostCreateView.as_view() ,name='create-post'),
     path('post/<int:pk>/update' , PostUpdateView.as_view() , name='post-update'),
-    path('post/<int:pk>/delete' , PostDeleteView.as_view() , name='post-delete'),    
+    path('post/<int:pk>/delete' , PostDeleteView.as_view() , name='post-delete'), 
+    path('api/v1/' , include('blog.api.v1.urls')),   
 ]
