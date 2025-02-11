@@ -18,18 +18,20 @@ def postList(request):
        
             
         
-    
-
-@api_view()
+@api_view(['GET' , 'PUT','DELETE'])
 def postDetail(request , id):
     post = get_object_or_404(Post , pk=id)
-    serializer =PostSerializers(post)
-    return Response(serializer.data)
+    if request.method =='GET':
+        serializer =PostSerializers(post)
+        return Response(serializer.data)
+    elif request.method =='PUT':
+        serializer = PostSerializers(post , data =request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(request.data)
+    elif request.method =='DELETE':
+        post.delete()
+        return Response('item removed successfully' , status=status.HTTP_204_NO_CONTENT)
     
-    # try:
-    #      post = Post.objects.get(pk=id)
-    #      serializer =PostSerializers(post)
-    #      return Response(serializer.data)
-    # except Post.DoesNotExist:
-    #     return Response("post does not excite",status=status.HTTP_404_NOT_FOUND)    
+     
    
