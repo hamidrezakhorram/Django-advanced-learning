@@ -26,9 +26,9 @@ class PostViewset(viewsets.ModelViewSet):
     serializer_class = PostSerializers
     queryset = Post.objects.filter(status=True)
 
-    @action(detail=False )
-    def test_extra():
-         return Response({'ok': 'blabla'})
+    # @action(detail=False)
+    # def test_extra():
+    #      return Response({'ok': 'blabla'})
 
     
         
