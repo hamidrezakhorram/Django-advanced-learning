@@ -74,3 +74,6 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     success_url = "/blog/post/"
+
+class PostApiTemplateView(TemplateView):
+    template_name='blog/post-api.html'
